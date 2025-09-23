@@ -5,9 +5,8 @@ import {
   FaGithub,
   FaEnvelope,
   FaGlobe,
-  FaBlog,
+  
   FaBook,
-  FaDownload,
   FaPen,
   FaBlogger,
   FaPhone,
@@ -23,7 +22,6 @@ import {
   FaBriefcase,
   FaMapMarkedAlt,
   FaGamepad,
-  FaAngleRight,
   FaBuilding,
   FaCheckCircle,
   FaLink,
@@ -31,9 +29,6 @@ import {
   FaProjectDiagram,
   FaTools,
   FaUserTie,
-  FaPlusCircle,
-  FaAngleDown,
-  FaEllipsisV,
 } from "react-icons/fa";
 import { motion } from "motion/react";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
@@ -190,11 +185,11 @@ export default function Page() {
     <div className="min-h-screen relative text-gray-100 mx-auto">
       {/* Background Image */}
       <div
-        className="absolute inset-0 z-10 opacity-40 sm:opacity-50 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 z-10 opacity-90 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/background.jpg')" }}
       />
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#18181b]/90 via-[#23272f]/90 to-[#1a1a2e]/90 sm:from-[#18181b] sm:via-[#23272f] sm:to-[#1a1a2e]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1b1a1c] via-[#1b1a31] to-[#080609] " />
 
       {/* Page content */}
       <div className="relative z-10">
@@ -203,7 +198,7 @@ export default function Page() {
           className="fixed inset-x-0 top-0 bg-transparent z-50"
           initial={{ y: -100, opacity: 0 }}
           animate={isLoading ? { y: -100, opacity: 0 } : { y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, delay: isLoading ? 0 : 0.2 }}
+          transition={{ duration: 1, delay: isLoading ? 0 : 0.2 }}
         >
           <div className="container mx-auto px-4 sm:px-6">
             <nav className="flex items-center justify-between h-16 sm:h-20">
@@ -282,7 +277,7 @@ export default function Page() {
           className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-6 w-full"
           initial={{ opacity: 0 }}
           animate={isLoading ? { opacity: 0 } : { opacity: 1 }}
-          transition={{ duration: 0.6, delay: isLoading ? 0 : 0.4 }}
+          transition={{ duration: 1.5, delay: isLoading ? 0 : 0.4 }}
         >
           <BentoGrid className="gap-4 sm:gap-6">
             <BentoGridItem
@@ -576,7 +571,7 @@ export default function Page() {
               {modal === "skills" && (
                 <div>
                   <h2 className="text-lg sm:text-2xl font-bold mb-4 flex items-center gap-2">
-                    <FaTools /> Skills
+                    <FaTools className="text-green-400" /> Skills
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     {skills.map((skill, i) => (
@@ -594,7 +589,7 @@ export default function Page() {
               {modal === "projects" && (
                 <div>
                   <h2 className="text-lg sm:text-2xl font-bold mb-4 flex items-center gap-2">
-                    <FaProjectDiagram /> Projects
+                    <FaProjectDiagram className="text-yellow-400" /> Projects
                   </h2>
                   <div className="flex flex-col gap-3">
                     {projects.map((p, i) => (
@@ -618,7 +613,7 @@ export default function Page() {
               {modal === "experience" && (
                 <div>
                   <h2 className="text-lg sm:text-2xl font-bold mb-4 flex items-center gap-2">
-                    <FaBriefcase /> Experience
+                    <FaBriefcase className="text-blue-400" /> Experience
                   </h2>
                   {experience.map((exp, i) => (
                     <div key={i} className="mb-4">
@@ -646,7 +641,7 @@ export default function Page() {
               {modal === "education" && (
                 <div>
                   <h2 className="text-lg sm:text-2xl font-bold mb-4 flex items-center gap-2">
-                    <FaGraduationCap /> Education
+                    <FaGraduationCap className="text-pink-400" /> Education
                   </h2>
                   {education.map((edu, i) => (
                     <div key={i} className="mb-4">
@@ -667,7 +662,7 @@ export default function Page() {
               {modal === "interests" && (
                 <div>
                   <h2 className="text-lg sm:text-2xl font-bold mb-4 flex items-center gap-2">
-                    <FaGamepad /> Interests
+                    <FaGamepad className="text-purple-400" /> Interests
                   </h2>
                   <ul className="list-disc list-inside text-white/70 text-xs sm:text-sm">
                     {interests.map((i, idx) => (

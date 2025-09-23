@@ -111,7 +111,7 @@ export const BentoGridItem = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         className={cn(
-          "relative min-h-[250px] h-full rounded-2xl p-4 sm:p-6 bg-gradient-to-br from-[#1e1e1f] via-[#303033] to-[#292a2c] text-[#D3DAD9] shadow-md border border-[#D3DAD9]/20 backdrop-blur-md w-full"
+          "relative min-h-[250px] h-full rounded-2xl p-4 sm:p-6 bg-gradient-to-br from-[#1e1f1f] via-[#303033] to-[#292a2c] text-[#D3DAD9] shadow-md border border-[#D3DAD9]/20 backdrop-blur-md w-full"
         )}
         {...motionProps}
       >

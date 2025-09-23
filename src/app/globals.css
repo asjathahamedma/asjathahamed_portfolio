@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-
-
 @theme inline {
   --shadow-input:
     0px 2px 3px -1px rgba(0, 0, 0, 0.1),
@@ -17,6 +15,7 @@
   --color-yellow-500: #f59e0b;
   --fill-initial: var(--color-neutral-50);
   --fill-final: var(--color-yellow-300);
+  --font-electrolize: "Electrolize", sans-serif; /* Added for font */
 }
 
 .dark {
@@ -26,4 +25,55 @@
   --color-yellow-500: #f59e0b;
   --fill-initial: var(--color-neutral-800);
   --fill-final: var(--color-yellow-500);
+}
+
+/* Font application */
+body {
+  font-family: var(--font-electrolize);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-electrolize);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.text-lg, .text-xl, .text-2xl {
+  font-family: var(--font-electrolize);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.text-sm, .text-xs, .text-base {
+  font-family: var(--font-electrolize);
+  font-weight: 400;
+}
+
+header nav button,
+header nav a {
+  font-family: var(--font-electrolize);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.bg-[#23272f] h2 {
+  font-family: var(--font-electrolize);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.bg-[#23272f] p,
+.bg-[#23272f] li,
+.bg-[#23272f] span {
+  font-family: var(--font-electrolize);
+  font-weight: 400;
+}
+
+.min-h-\[250px\] {
+  font-family: var(--font-electrolize);
+  font-weight: 400;
 }
