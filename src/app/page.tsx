@@ -5,7 +5,6 @@ import {
   FaGithub,
   FaEnvelope,
   FaGlobe,
-  
   FaBook,
   FaPen,
   FaBlogger,
@@ -40,16 +39,68 @@ export default function Page() {
     null | "skills" | "projects" | "experience" | "education" | "interests"
   >(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [contactOpen, setContactOpen] = useState(false);
 
-  const closeModal = () => setModal(null);
+  // Create audio safely (but don’t autoplay)
+  const hoverSound =
+    typeof Audio !== "undefined" ? new Audio("/sounds/hover-beep.mp3") : null;
+  const modalOpenSound =
+    typeof Audio !== "undefined" ? new Audio("/sounds/modal-open.mp3") : null;
+  const modalCloseSound =
+    typeof Audio !== "undefined" ? new Audio("/sounds/modal-close.mp3") : null;
+  const clickSound =
+    typeof Audio !== "undefined" ? new Audio("/sounds/click.mp3") : null;
 
-  // Simulate loading for 2.5 seconds
+  // Just loader, no page load sound
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 3500);
     return () => clearTimeout(timer);
   }, []);
+
+  // Helper to safely play sounds only after user interaction
+  const safePlay = (sound: HTMLAudioElement | null) => {
+    if (sound) {
+      sound.currentTime = 0; // reset before playing
+      sound.play().catch(() => {
+        // Ignore autoplay errors
+      });
+    }
+  };
+
+  // Handle modal open with sound
+  const openModal = (modalType: typeof modal) => {
+    setModal(modalType);
+    safePlay(modalOpenSound);
+  };
+
+  // Handle modal close with sound
+  const closeModal = () => {
+    setModal(null);
+    safePlay(modalCloseSound);
+  };
+
+  // Handle contact modal with sound
+  const openContactModal = () => {
+    setContactOpen(true);
+    safePlay(modalOpenSound);
+  };
+
+  const closeContactModal = () => {
+    setContactOpen(false);
+    safePlay(modalCloseSound);
+  };
+
+  // Handle hover sound
+  const playHoverSound = () => {
+    safePlay(hoverSound);
+  };
+
+  // Handle click sound for BentoGrid buttons
+  const playClickSound = () => {
+    safePlay(clickSound);
+  };
 
   const personalInfo = {
     name: "Asjath Ahamed Mohamed Aazath",
@@ -179,8 +230,6 @@ export default function Page() {
     "Learning Cloud Security (AWS/Azure) — Understanding security best practices for cloud infrastructure",
   ];
 
-  const [contactOpen, setContactOpen] = useState(false);
-
   return (
     <div className="min-h-screen relative text-gray-100 mx-auto">
       {/* Background Image */}
@@ -189,7 +238,7 @@ export default function Page() {
         style={{ backgroundImage: "url('/background.webp')" }}
       />
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1b1a1c] via-[#1b1a31] to-[#080609] " />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1b1a1c] via-[#1b1a31] to-[#080609]" />
 
       {/* Page content */}
       <div className="relative z-10">
@@ -224,13 +273,14 @@ export default function Page() {
                     icon: <FaEnvelope />,
                     link: "#",
                     name: "Email",
-                    onClick: () => setContactOpen(true),
+                    onClick: openContactModal,
                   },
                 ].map((item, i) =>
                   item.onClick ? (
                     <button
                       key={i}
                       onClick={item.onClick}
+                      onMouseEnter={playHoverSound}
                       className="relative group text-white text-lg sm:text-xl p-2 rounded hover:bg-white/10 transition-all duration-300"
                       aria-label={item.name}
                     >
@@ -245,6 +295,7 @@ export default function Page() {
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onMouseEnter={playHoverSound}
                       className="relative group text-white text-lg sm:text-xl p-2 rounded hover:bg-white/10 transition-all duration-300"
                       aria-label={item.name}
                     >
@@ -262,6 +313,8 @@ export default function Page() {
                 <a
                   href={personalInfo.resume}
                   target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={playHoverSound}
                   className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-blue-600 text-white text-sm sm:text-base font-medium hover:bg-white hover:text-black transition-all duration-300"
                   aria-label="Download Resume"
                 >
@@ -324,6 +377,7 @@ export default function Page() {
                         href={personalInfo.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onMouseEnter={playHoverSound}
                         className="text-white text-xl sm:text-2xl p-1 rounded-full hover:text-blue-400 transition-colors duration-300"
                         title="LinkedIn"
                         aria-label="LinkedIn Profile"
@@ -334,6 +388,7 @@ export default function Page() {
                         href={personalInfo.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onMouseEnter={playHoverSound}
                         className="text-white text-xl sm:text-2xl p-1 rounded-full hover:text-amber-400 transition-colors duration-300"
                         title="GitHub"
                         aria-label="GitHub Profile"
@@ -344,6 +399,7 @@ export default function Page() {
                         href={personalInfo.Blog}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onMouseEnter={playHoverSound}
                         className="text-white text-xl sm:text-2xl p-1 rounded-full hover:text-green-400 transition-colors duration-300"
                         title="Blog"
                         aria-label="Blog"
@@ -367,18 +423,24 @@ export default function Page() {
                     </h2>
                     <div className="flex flex-col gap-1">
                       <div className="flex items-center gap-2 text-white font-semibold text-sm sm:text-base">
-                        <FaPen className="text-white/70" /> {experience[0].title}
+                        <FaPen className="text-white/70" />{" "}
+                        {experience[0].title}
                       </div>
                       <div className="flex items-center gap-2 text-white/80 text-sm sm:text-base">
-                        <FaMapMarkedAlt className="text-white/60" /> {experience[0].company}
+                        <FaMapMarkedAlt className="text-white/60" />{" "}
+                        {experience[0].company}
                       </div>
                       <div className="flex items-center gap-2 text-white/60 text-xs sm:text-sm">
-                        <FaCalendar className="text-white/50" /> {experience[0].period} - {experience[0].location}
+                        <FaCalendar className="text-white/50" />{" "}
+                        {experience[0].period} - {experience[0].location}
                       </div>
                     </div>
                   </div>
                   <button
-                    onClick={() => setModal("experience")}
+                    onClick={() => {
+                      playClickSound();
+                      openModal("experience");
+                    }}
                     className="mt-2 px-3 py-1 bg-white rounded text-black text-sm sm:text-base hover:bg-blue-700 self-end transition-colors duration-300 cursor-pointer"
                     aria-label="View more experience"
                   >
@@ -403,7 +465,8 @@ export default function Page() {
                           key={i}
                           className="px-2 py-1 rounded bg-white/20 text-white text-xs sm:text-sm flex items-center gap-1"
                         >
-                          <FaCheck className="text-white/70 text-[0.6rem]" /> {s}
+                          <FaCheck className="text-white/70 text-[0.6rem]" />{" "}
+                          {s}
                         </span>
                       ))}
                       {skills.length > 8 && (
@@ -414,7 +477,10 @@ export default function Page() {
                     </div>
                   </div>
                   <button
-                    onClick={() => setModal("skills")}
+                    onClick={() => {
+                      playClickSound();
+                      openModal("skills");
+                    }}
                     className="mt-2 px-3 py-1 bg-white rounded text-black text-sm sm:text-base hover:bg-blue-700 self-end transition-colors duration-300 cursor-pointer"
                     aria-label="View more skills"
                   >
@@ -439,6 +505,7 @@ export default function Page() {
                           href={p.link}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onMouseEnter={playHoverSound}
                           className="text-white/90 font-semibold flex items-baseline gap-2 hover:text-blue-400 transition-colors duration-300 text-sm sm:text-base"
                         >
                           <FaArrowRight className="text-sm" /> {p.name}
@@ -447,7 +514,10 @@ export default function Page() {
                     ))}
                   </div>
                   <button
-                    onClick={() => setModal("projects")}
+                    onClick={() => {
+                      playClickSound();
+                      openModal("projects");
+                    }}
                     className="mt-2 px-3 py-1 bg-white rounded text-black text-sm sm:text-base hover:bg-blue-700 self-end transition-colors duration-300 cursor-pointer"
                     aria-label="View more projects"
                   >
@@ -470,14 +540,19 @@ export default function Page() {
                       <FaBook className="text-sm" /> {education[0].degree}
                     </div>
                     <div className="text-white/80 flex items-baseline gap-2 text-sm sm:text-base">
-                      <FaUniversity className="text-sm" /> {education[0].university}
+                      <FaUniversity className="text-sm" />{" "}
+                      {education[0].university}
                     </div>
                     <div className="text-white/60 text-xs sm:text-sm flex items-center gap-2">
-                      <FaCalendarAlt className="text-xs" /> {education[0].period}
+                      <FaCalendarAlt className="text-xs" />{" "}
+                      {education[0].period}
                     </div>
                   </div>
                   <button
-                    onClick={() => setModal("education")}
+                    onClick={() => {
+                      playClickSound();
+                      openModal("education");
+                    }}
                     className="mt-2 px-3 py-1 bg-white rounded text-black text-sm sm:text-base hover:bg-blue-700 self-end transition-colors duration-300 cursor-pointer"
                     aria-label="View more education"
                   >
@@ -514,7 +589,10 @@ export default function Page() {
                     </div>
                   </div>
                   <button
-                    onClick={() => setModal("interests")}
+                    onClick={() => {
+                      playClickSound();
+                      openModal("interests");
+                    }}
                     className="mt-2 px-3 py-1 bg-white rounded text-black text-sm sm:text-base hover:bg-blue-700 self-end transition-colors duration-300 cursor-pointer"
                     aria-label="View more interests"
                   >
@@ -554,14 +632,19 @@ export default function Page() {
                 ].map((section) => (
                   <button
                     key={section.name}
-                    onClick={() => setModal(section.name as any)}
+                    onClick={() => openModal(section.name as any)}
                     className={`flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1 rounded text-xs sm:text-sm font-semibold 
-              ${modal === section.name ? "bg-blue-600 text-white" : "bg-white/20 text-white"}`}
+              ${
+                modal === section.name
+                  ? "bg-blue-600 text-white"
+                  : "bg-white/20 text-white"
+              }`}
                     aria-label={`View ${section.name}`}
                   >
                     {section.icon}
                     <span>
-                      {section.name.charAt(0).toUpperCase() + section.name.slice(1)}
+                      {section.name.charAt(0).toUpperCase() +
+                        section.name.slice(1)}
                     </span>
                   </button>
                 ))}
@@ -598,12 +681,15 @@ export default function Page() {
                         href={p.link}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onMouseEnter={playHoverSound}
                         className="p-4 rounded-lg bg-white/10 hover:bg-blue-600 hover:text-white transition-all duration-200 flex flex-col gap-1"
                       >
                         <h3 className="text-base sm:text-lg font-semibold flex items-center gap-2">
                           <FaLink /> {p.name}
                         </h3>
-                        <p className="text-white/80 text-xs sm:text-sm">{p.description}</p>
+                        <p className="text-white/80 text-xs sm:text-sm">
+                          {p.description}
+                        </p>
                       </a>
                     ))}
                   </div>
@@ -624,7 +710,8 @@ export default function Page() {
                         <FaBuilding /> {exp.company}
                       </p>
                       <p className="text-white/60 text-xs sm:text-sm flex items-center gap-2">
-                        <FaCalendarAlt /> {exp.period} - <FaMapMarkerAlt /> {exp.location}
+                        <FaCalendarAlt /> {exp.period} - <FaMapMarkerAlt />{" "}
+                        {exp.location}
                       </p>
                       <ul className="list-disc list-inside mt-2 text-white/70 text-xs sm:text-sm">
                         {exp.details.map((d, j) => (
@@ -652,7 +739,8 @@ export default function Page() {
                         <FaUniversity /> {edu.university}
                       </p>
                       <p className="text-white/60 text-xs sm:text-sm flex items-center gap-1">
-                        <FaCalendarAlt /> {edu.period} - <FaMapMarkerAlt /> {edu.location}
+                        <FaCalendarAlt /> {edu.period} - <FaMapMarkerAlt />{" "}
+                        {edu.location}
                       </p>
                     </div>
                   ))}
@@ -678,10 +766,7 @@ export default function Page() {
         )}
 
         {contactOpen && (
-          <ContactModal
-            open={contactOpen}
-            onClose={() => setContactOpen(false)}
-          />
+          <ContactModal open={contactOpen} onClose={closeContactModal} />
         )}
       </div>
 
