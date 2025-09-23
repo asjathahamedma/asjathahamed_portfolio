@@ -1,103 +1,706 @@
-import Image from "next/image";
+"use client";
+import { useState, useEffect } from "react";
+import {
+  FaLinkedin,
+  FaGithub,
+  FaEnvelope,
+  FaGlobe,
+  FaBlog,
+  FaBook,
+  FaDownload,
+  FaPen,
+  FaBlogger,
+  FaPhone,
+  FaUser,
+  FaCalendar,
+  FaCheck,
+  FaArrowRight,
+  FaCalendarAlt,
+  FaGraduationCap,
+  FaUniversity,
+  FaStar,
+  FaEllipsisH,
+  FaBriefcase,
+  FaMapMarkedAlt,
+  FaGamepad,
+  FaAngleRight,
+  FaBuilding,
+  FaCheckCircle,
+  FaLink,
+  FaMapMarkerAlt,
+  FaProjectDiagram,
+  FaTools,
+  FaUserTie,
+  FaPlusCircle,
+  FaAngleDown,
+  FaEllipsisV,
+} from "react-icons/fa";
+import { motion } from "motion/react";
+import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
+import ContactModal from "@/components/ui/ContactModal";
+import { LoaderThree } from "@/components/ui/loader";
 
-export default function Home() {
+export default function Page() {
+  const [modal, setModal] = useState<
+    null | "skills" | "projects" | "experience" | "education" | "interests"
+  >(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const closeModal = () => setModal(null);
+
+  // Simulate loading for 2.5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const personalInfo = {
+    name: "Asjath Ahamed Mohamed Aazath",
+    role: "Penetration Tester | Network Engineer",
+    email: "asjathahamedma@gmail.com",
+    phone: "+94 75 821 8880",
+    location: "Sri Lanka",
+    linkedin: "https://www.linkedin.com/in/asjathahamedma",
+    github: "https://github.com/asjathahamedma",
+    Blog: "https://github.com/asjathahamedma/Cyber-Security-Writeups",
+    photo: "/profile1.jpg",
+    resume: "/Asjath-Ahamed-Mohamed-Aazath.pdf",
+  };
+
+  const skills = [
+    "TCP/IP",
+    "VLANs",
+    "STP",
+    "NAT/PAT",
+    "DNS",
+    "DHCP",
+    "SNMP",
+    "ICMP",
+    "WPA3",
+    "IPsec",
+    "SSL VPN",
+    "TLS",
+    "NAC",
+    "Burp Suite",
+    "Nmap",
+    "Amass",
+    "Nessus",
+    "Wireshark",
+    "Metasploit",
+    "Nikto",
+    "OWASP ZAP",
+    "Hydra",
+    "SQLmap",
+    "John the Ripper",
+    "Aircrack-ng",
+    "Recon-ng",
+    "Enum4linux",
+    "Windows Server 2019/2022",
+    "Linux/Kali-Linux",
+    "Active Directory",
+    "VMware",
+    "Microsoft Hyper-V",
+    "Microsoft Azure",
+    "PostgreSQL",
+    "MySQL",
+    "Local Database Administration",
+    "Git/GitHub",
+    "Python",
+    "JavaScript",
+    "C++",
+    "Next.js",
+    "React",
+    "Tailwind CSS",
+    "PowerShell",
+    "Bash/Shell Scripting",
+    "Teamwork",
+    "Communication",
+    "Adaptability",
+    "Problem-Solving",
+  ];
+
+  const projects = [
+    {
+      name: "Viper Scanner",
+      description:
+        "Python-based tool using Nmap for automated host discovery, port scanning, and HTML vulnerability reporting.",
+      link: "https://github.com/asjathahamedma/viperscanner.git",
+    },
+    {
+      name: "AD Automation with PowerShell & UiPath",
+      description:
+        "Automated Active Directory tasks with PowerShell and UiPath, improving admin efficiency and security.",
+      link: "",
+    },
+    {
+      name: "Portfolio Website",
+      description: "Personal portfolio built with Next.js and Tailwind CSS.",
+      link: "https://glitchviper.vercel.app/",
+    },
+  ];
+
+  const experience = [
+    {
+      title: "IT Administrator",
+      company: "ATM Pharmacy",
+      period: "Jan 2024 – Jul 2025",
+      location: "Akkaraipattu, Sri Lanka",
+      details: [
+        "Administered local database for stock and income tracking, managing 500+ inventory records and financial transactions to ensure data accuracy and operational efficiency.",
+        "Troubleshot network connectivity issues for Wi-Fi, LAN, and IP-based CCTV systems, reducing downtime by approximately 20%.",
+        "Configured and maintained IP-based CCTV systems, ensuring secure and reliable surveillance operations through proper network settings.",
+        "Performed regular database maintenance, including backups and updates, to prevent data loss and ensure system reliability.",
+        "Implemented basic security measures, such as user access controls and password management, to protect sensitive inventory and financial data.",
+      ],
+    },
+  ];
+
+  const education = [
+    {
+      degree: "BSc (Hons) in Data Science",
+      university: "ESOFT Metro Campus (London Metropolitan University)",
+      period: "Sep 2025 – Present",
+      location: "Colombo, Sri Lanka",
+    },
+    {
+      degree: "Higher Diploma in Network Technology & Cyber Security",
+      university: "ICBT Campus (Cardiff Metropolitan University)",
+      period: "Sep 2022 – Dec 2024",
+      location: "Batticaloa, Sri Lanka",
+    },
+  ];
+
+  const interests = [
+    "Playing CTF on Hack The Box — Engaging in challenges to enhance cybersecurity skills",
+    "Bug Bounty Hunting at HackerOne — Exploring vulnerability discovery with a focus on real-world applications",
+    "Exploring AI/ML in Cybersecurity — Investigating the intersection of artificial intelligence and threat detection",
+    "Participating in Open Source Security Projects — Contributing to tools and libraries that improve software security",
+    "Attending Security Conferences and Webinars — Staying updated on the latest trends, tools, and methodologies in cybersecurity",
+    "Reverse Engineering Malware Samples — Analyzing malware behavior to understand attack vectors and mitigation strategies",
+    "Developing Security Scripts and Automation Tools — Writing Python or Bash scripts to automate vulnerability scanning and monitoring",
+    "Practicing Social Engineering Simulations — Learning techniques to identify and defend against human-targeted attacks",
+    "Learning Cloud Security (AWS/Azure) — Understanding security best practices for cloud infrastructure",
+  ];
+
+  const [contactOpen, setContactOpen] = useState(false);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen relative text-gray-100 mx-auto">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 z-10 opacity-40 sm:opacity-50 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/background.jpg')" }}
+      />
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#18181b]/90 via-[#23272f]/90 to-[#1a1a2e]/90 sm:from-[#18181b] sm:via-[#23272f] sm:to-[#1a1a2e]" />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      {/* Page content */}
+      <div className="relative z-10">
+        {/* Navbar with entry animation */}
+        <motion.header
+          className="fixed inset-x-0 top-0 bg-transparent z-50"
+          initial={{ y: -100, opacity: 0 }}
+          animate={isLoading ? { y: -100, opacity: 0 } : { y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: isLoading ? 0 : 0.2 }}
+        >
+          <div className="container mx-auto px-4 sm:px-6">
+            <nav className="flex items-center justify-between h-16 sm:h-20">
+              {/* Left Side - Social Links */}
+              <div className="flex items-center gap-4 sm:gap-6">
+                {[
+                  {
+                    icon: <FaLinkedin />,
+                    link: personalInfo.linkedin,
+                    name: "LinkedIn",
+                  },
+                  {
+                    icon: <FaGithub />,
+                    link: personalInfo.github,
+                    name: "GitHub",
+                  },
+                  {
+                    icon: <FaBlogger />,
+                    link: personalInfo.Blog,
+                    name: "Blog",
+                  },
+                  {
+                    icon: <FaEnvelope />,
+                    link: "#",
+                    name: "Email",
+                    onClick: () => setContactOpen(true),
+                  },
+                ].map((item, i) =>
+                  item.onClick ? (
+                    <button
+                      key={i}
+                      onClick={item.onClick}
+                      className="relative group text-white text-lg sm:text-xl p-2 rounded hover:bg-white/10 transition-all duration-300"
+                      aria-label={item.name}
+                    >
+                      {item.icon}
+                      <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max opacity-0 group-hover:opacity-100 bg-white text-black text-xs sm:text-sm px-2 py-1 rounded shadow-lg transition-all duration-300 pointer-events-none whitespace-nowrap z-50">
+                        {item.name}
+                      </span>
+                    </button>
+                  ) : (
+                    <a
+                      key={i}
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative group text-white text-lg sm:text-xl p-2 rounded hover:bg-white/10 transition-all duration-300"
+                      aria-label={item.name}
+                    >
+                      {item.icon}
+                      <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max opacity-0 group-hover:opacity-100 bg-white text-black text-xs sm:text-sm px-2 py-1 rounded shadow-lg transition-all duration-300 pointer-events-none whitespace-nowrap z-50">
+                        {item.name}
+                      </span>
+                    </a>
+                  )
+                )}
+              </div>
+
+              {/* Right Side - Resume Button */}
+              <div className="hover:scale-105 transition-all duration-300">
+                <a
+                  href={personalInfo.resume}
+                  target="_blank"
+                  className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-blue-600 text-white text-sm sm:text-base font-medium hover:bg-white hover:text-black transition-all duration-300"
+                  aria-label="Download Resume"
+                >
+                  Resume
+                </a>
+              </div>
+            </nav>
+          </div>
+        </motion.header>
+
+        {/* Dashboard with entry animation */}
+        <motion.main
+          className="container mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-6 w-full"
+          initial={{ opacity: 0 }}
+          animate={isLoading ? { opacity: 0 } : { opacity: 1 }}
+          transition={{ duration: 0.6, delay: isLoading ? 0 : 0.4 }}
+        >
+          <BentoGrid className="gap-4 sm:gap-6">
+            <BentoGridItem
+              className="col-span-1 sm:col-span-2"
+              header={
+                <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left h-full gap-4 sm:gap-6">
+                  {/* Profile Image */}
+                  <div className="flex-shrink-0">
+                    <img
+                      src={personalInfo.photo}
+                      alt={personalInfo.name}
+                      className="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-white object-cover"
+                    />
+                  </div>
+
+                  {/* Info */}
+                  <div className="flex flex-col justify-center gap-2">
+                    {/* Name with Icon */}
+                    <h2 className="text-lg sm:text-xl md:text-xl font-bold flex items-center gap-2">
+                      <FaUser /> {personalInfo.name}
+                    </h2>
+
+                    {/* Role */}
+                    <p className="text-white/80 text-sm sm:text-base md:text-lg">
+                      {personalInfo.role}
+                    </p>
+
+                    {/* Contact Info */}
+                    <div className="flex flex-col gap-2 sm:gap-3 mt-1 text-white/70 text-xs sm:text-sm">
+                      <span className="flex items-center gap-1">
+                        <FaEnvelope /> {personalInfo.email}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <FaPhone /> {personalInfo.phone}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <FaGlobe /> {personalInfo.location}
+                      </span>
+                    </div>
+
+                    {/* Social Profiles */}
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-2 justify-center md:justify-start">
+                      <a
+                        href={personalInfo.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white text-xl sm:text-2xl p-1 rounded-full hover:text-blue-400 transition-colors duration-300"
+                        title="LinkedIn"
+                        aria-label="LinkedIn Profile"
+                      >
+                        <FaLinkedin />
+                      </a>
+                      <a
+                        href={personalInfo.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white text-xl sm:text-2xl p-1 rounded-full hover:text-amber-400 transition-colors duration-300"
+                        title="GitHub"
+                        aria-label="GitHub Profile"
+                      >
+                        <FaGithub />
+                      </a>
+                      <a
+                        href={personalInfo.Blog}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white text-xl sm:text-2xl p-1 rounded-full hover:text-green-400 transition-colors duration-300"
+                        title="Blog"
+                        aria-label="Blog"
+                      >
+                        <FaBlogger />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              }
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+            {/* Experience */}
+            <BentoGridItem
+              className="col-span-1 sm:col-span-2"
+              header={
+                <div className="flex flex-col justify-between h-full">
+                  <div>
+                    <h2 className="text-lg sm:text-xl font-bold mb-2 flex items-center gap-2">
+                      <FaBriefcase className="text-blue-400" /> Experience
+                    </h2>
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-2 text-white font-semibold text-sm sm:text-base">
+                        <FaPen className="text-white/70" /> {experience[0].title}
+                      </div>
+                      <div className="flex items-center gap-2 text-white/80 text-sm sm:text-base">
+                        <FaMapMarkedAlt className="text-white/60" /> {experience[0].company}
+                      </div>
+                      <div className="flex items-center gap-2 text-white/60 text-xs sm:text-sm">
+                        <FaCalendar className="text-white/50" /> {experience[0].period} - {experience[0].location}
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setModal("experience")}
+                    className="mt-2 px-3 py-1 bg-white rounded text-black text-sm sm:text-base hover:bg-blue-700 self-end transition-colors duration-300 cursor-pointer"
+                    aria-label="View more experience"
+                  >
+                    <FaEllipsisH />
+                  </button>
+                </div>
+              }
+            />
+
+            {/* Skills */}
+            <BentoGridItem
+              className="col-span-1"
+              header={
+                <div className="flex flex-col justify-between h-full">
+                  <div>
+                    <h2 className="text-base sm:text-lg font-bold mb-2 flex items-center gap-2">
+                      <FaTools className="text-green-400" /> Skills
+                    </h2>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {skills.slice(0, 8).map((s, i) => (
+                        <span
+                          key={i}
+                          className="px-2 py-1 rounded bg-white/20 text-white text-xs sm:text-sm flex items-center gap-1"
+                        >
+                          <FaCheck className="text-white/70 text-[0.6rem]" /> {s}
+                        </span>
+                      ))}
+                      {skills.length > 8 && (
+                        <span className="px-2 py-1 rounded bg-white/30 text-white text-xs sm:text-sm flex items-center gap-1">
+                          +{skills.length - 8} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setModal("skills")}
+                    className="mt-2 px-3 py-1 bg-white rounded text-black text-sm sm:text-base hover:bg-blue-700 self-end transition-colors duration-300 cursor-pointer"
+                    aria-label="View more skills"
+                  >
+                    <FaEllipsisH />
+                  </button>
+                </div>
+              }
+            />
+
+            {/* Projects */}
+            <BentoGridItem
+              className="col-span-1"
+              header={
+                <div className="flex flex-col justify-between h-full">
+                  <div>
+                    <h2 className="text-base sm:text-lg font-bold mb-2 flex items-center gap-2">
+                      <FaProjectDiagram className="text-yellow-400" /> Projects
+                    </h2>
+                    {projects.slice(0, 2).map((p, i) => (
+                      <div key={i} className="mb-2">
+                        <a
+                          href={p.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white/90 font-semibold flex items-baseline gap-2 hover:text-blue-400 transition-colors duration-300 text-sm sm:text-base"
+                        >
+                          <FaArrowRight className="text-sm" /> {p.name}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => setModal("projects")}
+                    className="mt-2 px-3 py-1 bg-white rounded text-black text-sm sm:text-base hover:bg-blue-700 self-end transition-colors duration-300 cursor-pointer"
+                    aria-label="View more projects"
+                  >
+                    <FaEllipsisH />
+                  </button>
+                </div>
+              }
+            />
+
+            {/* Education */}
+            <BentoGridItem
+              className="col-span-1"
+              header={
+                <div className="flex flex-col justify-between h-full">
+                  <div>
+                    <h2 className="text-base sm:text-lg font-bold mb-2 flex items-center gap-2">
+                      <FaGraduationCap className="text-pink-500" /> Education
+                    </h2>
+                    <div className="text-white font-semibold flex items-center gap-2 text-sm sm:text-base">
+                      <FaBook className="text-sm" /> {education[0].degree}
+                    </div>
+                    <div className="text-white/80 flex items-baseline gap-2 text-sm sm:text-base">
+                      <FaUniversity className="text-sm" /> {education[0].university}
+                    </div>
+                    <div className="text-white/60 text-xs sm:text-sm flex items-center gap-2">
+                      <FaCalendarAlt className="text-xs" /> {education[0].period}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setModal("education")}
+                    className="mt-2 px-3 py-1 bg-white rounded text-black text-sm sm:text-base hover:bg-blue-700 self-end transition-colors duration-300 cursor-pointer"
+                    aria-label="View more education"
+                  >
+                    <FaEllipsisH />
+                  </button>
+                </div>
+              }
+            />
+
+            {/* Interests */}
+            <BentoGridItem
+              className="col-span-1"
+              header={
+                <div className="flex flex-col justify-between h-full">
+                  <div>
+                    <h2 className="text-base sm:text-lg font-bold mb-2 flex items-center gap-2">
+                      <FaGamepad className="text-purple-400" /> Interests
+                    </h2>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {interests.slice(0, 2).map((i, idx) => (
+                        <span
+                          key={idx}
+                          className="px-2 py-1 rounded bg-white/20 text-white text-xs sm:text-sm flex items-baseline gap-1"
+                        >
+                          <FaStar className="text-yellow-400 text-xs" /> {i}
+                        </span>
+                      ))}
+                      {interests.length > 2 && (
+                        <span className="px-2 py-1 rounded bg-white/30 text-white text-xs sm:text-sm flex items-center gap-1">
+                          <FaEllipsisH className="text-white/80 text-xs" /> +
+                          {interests.length - 2} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setModal("interests")}
+                    className="mt-2 px-3 py-1 bg-white rounded text-black text-sm sm:text-base hover:bg-blue-700 self-end transition-colors duration-300 cursor-pointer"
+                    aria-label="View more interests"
+                  >
+                    <FaEllipsisH />
+                  </button>
+                </div>
+              }
+            />
+          </BentoGrid>
+        </motion.main>
+
+        {modal && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+            onClick={closeModal}
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            <div
+              className="bg-[#23272f] p-4 sm:p-6 rounded-2xl w-[95%] sm:w-[90%] md:max-w-3xl max-h-[80vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="text-white/70 hover:text-white float-right text-lg sm:text-xl font-bold"
+                onClick={closeModal}
+                aria-label="Close modal"
+              >
+                ×
+              </button>
+
+              {/* Tabs */}
+              <div className="flex gap-2 mb-4 flex-wrap">
+                {[
+                  { name: "experience", icon: <FaBriefcase /> },
+                  { name: "skills", icon: <FaTools /> },
+                  { name: "projects", icon: <FaProjectDiagram /> },
+                  { name: "education", icon: <FaGraduationCap /> },
+                  { name: "interests", icon: <FaGamepad /> },
+                ].map((section) => (
+                  <button
+                    key={section.name}
+                    onClick={() => setModal(section.name as any)}
+                    className={`flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1 rounded text-xs sm:text-sm font-semibold 
+              ${modal === section.name ? "bg-blue-600 text-white" : "bg-white/20 text-white"}`}
+                    aria-label={`View ${section.name}`}
+                  >
+                    {section.icon}
+                    <span>
+                      {section.name.charAt(0).toUpperCase() + section.name.slice(1)}
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Tab Content */}
+              {modal === "skills" && (
+                <div>
+                  <h2 className="text-lg sm:text-2xl font-bold mb-4 flex items-center gap-2">
+                    <FaTools /> Skills
+                  </h2>
+                  <div className="flex flex-wrap gap-2">
+                    {skills.map((skill, i) => (
+                      <span
+                        key={i}
+                        className="px-2 py-1 rounded bg-white/20 text-white text-xs sm:text-sm"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {modal === "projects" && (
+                <div>
+                  <h2 className="text-lg sm:text-2xl font-bold mb-4 flex items-center gap-2">
+                    <FaProjectDiagram /> Projects
+                  </h2>
+                  <div className="flex flex-col gap-3">
+                    {projects.map((p, i) => (
+                      <a
+                        key={i}
+                        href={p.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-4 rounded-lg bg-white/10 hover:bg-blue-600 hover:text-white transition-all duration-200 flex flex-col gap-1"
+                      >
+                        <h3 className="text-base sm:text-lg font-semibold flex items-center gap-2">
+                          <FaLink /> {p.name}
+                        </h3>
+                        <p className="text-white/80 text-xs sm:text-sm">{p.description}</p>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {modal === "experience" && (
+                <div>
+                  <h2 className="text-lg sm:text-2xl font-bold mb-4 flex items-center gap-2">
+                    <FaBriefcase /> Experience
+                  </h2>
+                  {experience.map((exp, i) => (
+                    <div key={i} className="mb-4">
+                      <h3 className="text-base sm:text-xl font-semibold flex items-center gap-2">
+                        <FaUserTie /> {exp.title}
+                      </h3>
+                      <p className="text-white/80 flex items-center gap-2 text-sm sm:text-base">
+                        <FaBuilding /> {exp.company}
+                      </p>
+                      <p className="text-white/60 text-xs sm:text-sm flex items-center gap-2">
+                        <FaCalendarAlt /> {exp.period} - <FaMapMarkerAlt /> {exp.location}
+                      </p>
+                      <ul className="list-disc list-inside mt-2 text-white/70 text-xs sm:text-sm">
+                        {exp.details.map((d, j) => (
+                          <li key={j} className="flex items-baseline gap-2">
+                            <FaCheckCircle className="text-blue-400" /> {d}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {modal === "education" && (
+                <div>
+                  <h2 className="text-lg sm:text-2xl font-bold mb-4 flex items-center gap-2">
+                    <FaGraduationCap /> Education
+                  </h2>
+                  {education.map((edu, i) => (
+                    <div key={i} className="mb-4">
+                      <h3 className="text-base sm:text-xl font-semibold flex items-center gap-2">
+                        <FaBook /> {edu.degree}
+                      </h3>
+                      <p className="text-white/80 flex items-center gap-1 text-sm sm:text-base">
+                        <FaUniversity /> {edu.university}
+                      </p>
+                      <p className="text-white/60 text-xs sm:text-sm flex items-center gap-1">
+                        <FaCalendarAlt /> {edu.period} - <FaMapMarkerAlt /> {edu.location}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {modal === "interests" && (
+                <div>
+                  <h2 className="text-lg sm:text-2xl font-bold mb-4 flex items-center gap-2">
+                    <FaGamepad /> Interests
+                  </h2>
+                  <ul className="list-disc list-inside text-white/70 text-xs sm:text-sm">
+                    {interests.map((i, idx) => (
+                      <li key={idx} className="flex items-baseline gap-2">
+                        <FaStar className="text-blue-400" /> {i}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {contactOpen && (
+          <ContactModal
+            open={contactOpen}
+            onClose={() => setContactOpen(false)}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        )}
+      </div>
+
+      {/* LoaderThree SVG Loader */}
+      {isLoading && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <LoaderThree />
+        </motion.div>
+      )}
     </div>
   );
 }
