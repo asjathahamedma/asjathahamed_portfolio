@@ -43,13 +43,13 @@ export default function Page() {
 
   // Create audio safely (but don’t autoplay)
   const hoverSound =
-    typeof Audio !== "undefined" ? new Audio("/sounds/hover-beep.mp3") : null;
+    typeof Audio !== "undefined" ? new Audio("/hover-beep.mp3") : null;
   const modalOpenSound =
-    typeof Audio !== "undefined" ? new Audio("/sounds/modal-open.mp3") : null;
+    typeof Audio !== "undefined" ? new Audio("/modal-open.mp3") : null;
   const modalCloseSound =
-    typeof Audio !== "undefined" ? new Audio("/sounds/modal-close.mp3") : null;
+    typeof Audio !== "undefined" ? new Audio("/modal-close.mp3") : null;
   const clickSound =
-    typeof Audio !== "undefined" ? new Audio("/sounds/click.mp3") : null;
+    typeof Audio !== "undefined" ? new Audio("/click.mp3") : null;
 
   // Just loader, no page load sound
   useEffect(() => {
