@@ -181,7 +181,7 @@ export default function Page() {
       link: "",
     },
     {
-      name: "Portfolio Website",
+      name: "GlitchViper Portfolio Website",
       description: "Personal portfolio built with Next.js and Tailwind CSS.",
       link: "https://glitchviper.vercel.app/",
     },
@@ -235,7 +235,7 @@ export default function Page() {
       {/* Background Image */}
       <div
         className="absolute inset-0 z-10 opacity-90 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/background.webp')" }}
+        style={{ backgroundImage: "url('/background.png')" }}
       />
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#1b1a1c] via-[#1b1a31] to-[#080609]" />
