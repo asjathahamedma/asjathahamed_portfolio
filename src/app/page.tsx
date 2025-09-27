@@ -189,7 +189,7 @@ const projects = [
    {
      name: "GlitchViper Portfolio Website",
      description: "Personal portfolio built with Next.js and Tailwind CSS.",
-     link: "https://asjath.xyz/", // Corrected link to the live site
+     link: "https://glitchviper.vercel.app/", // Corrected link to the live site
    },
  ];
 
