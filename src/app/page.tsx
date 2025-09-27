@@ -167,25 +167,31 @@ export default function Page() {
     "Problem-Solving",
   ];
 
-  const projects = [
-    {
-      name: "Viper Scanner",
-      description:
-        "Python-based tool using Nmap for automated host discovery, port scanning, and HTML vulnerability reporting.",
-      link: "https://github.com/asjathahamedma/viperscanner.git",
-    },
-    {
-      name: "AD Automation with PowerShell & UiPath",
-      description:
-        "Automated Active Directory tasks with PowerShell and UiPath, improving admin efficiency and security.",
-      link: "",
-    },
-    {
-      name: "GlitchViper Portfolio Website",
-      description: "Personal portfolio built with Next.js and Tailwind CSS.",
-      link: "https://glitchviper.vercel.app/",
-    },
-  ];
+const projects = [
+   {
+     name: "TopJobs Auto Mailer",
+     description:
+       "A Python bot that automates the job search by scraping listings, filtering by role/level, and sending personalized email applications with a CV.",
+     link: "https://github.com/asjathahamedma/Tobjobs-Auto-Mailer",
+   },
+   {
+     name: "Viper Scanner",
+     description:
+       "Python-based tool using Nmap for automated host discovery, port scanning, and HTML vulnerability reporting.",
+     link: "https://github.com/asjathahamedma/viperscanner.git",
+   },
+   {
+     name: "AD Automation with PowerShell & UiPath",
+     description:
+       "Automated Active Directory tasks with PowerShell and UiPath, improving admin efficiency and security.",
+     link: "", // No public link provided
+   },
+   {
+     name: "GlitchViper Portfolio Website",
+     description: "Personal portfolio built with Next.js and Tailwind CSS.",
+     link: "https://asjath.xyz/", // Corrected link to the live site
+   },
+ ];
 
   const experience = [
     {
