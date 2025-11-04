@@ -193,21 +193,35 @@ const projects = [
    },
  ];
 
-  const experience = [
-    {
-      title: "IT Administrator",
-      company: "ATM Pharmacy",
-      period: "Jan 2024 – Jul 2025",
-      location: "Akkaraipattu, Sri Lanka",
-      details: [
-        "Administered local database for stock and income tracking, managing 500+ inventory records and financial transactions to ensure data accuracy and operational efficiency.",
-        "Troubleshot network connectivity issues for Wi-Fi, LAN, and IP-based CCTV systems, reducing downtime by approximately 20%.",
-        "Configured and maintained IP-based CCTV systems, ensuring secure and reliable surveillance operations through proper network settings.",
-        "Performed regular database maintenance, including backups and updates, to prevent data loss and ensure system reliability.",
-        "Implemented basic security measures, such as user access controls and password management, to protect sensitive inventory and financial data.",
-      ],
-    },
-  ];
+const experience = [
+  {
+    title: "Application Support Engineer",
+    company: "IPOSG",
+    period: "Nov 2025 – Present",
+    location: "Colombo, Western Province, Sri Lanka (On-site)",
+    details: [
+      "Provided technical support for enterprise-level POS and back-office software, ensuring optimal performance and reliability for client systems.",
+      "Diagnosed and resolved application and network-related issues reported by clients, improving system uptime and user satisfaction.",
+      "Collaborated with the development team to troubleshoot backend API integrations and database connectivity issues.",
+      "Assisted clients in configuring and maintaining POS software, including setup, updates, and issue resolution.",
+      "Supported network troubleshooting across client environments to ensure stable application performance.",
+    ],
+  },
+  {
+    title: "IT Administrator",
+    company: "ATM Pharmacy",
+    period: "Jan 2024 – Jul 2025",
+    location: "Akkaraipattu, Sri Lanka",
+    details: [
+      "Administered local database for stock and income tracking, managing 500+ inventory records and financial transactions to ensure data accuracy and operational efficiency.",
+      "Troubleshot network connectivity issues for Wi-Fi, LAN, and IP-based CCTV systems, reducing downtime by approximately 20%.",
+      "Configured and maintained IP-based CCTV systems, ensuring secure and reliable surveillance operations through proper network settings.",
+      "Performed regular database maintenance, including backups and updates, to prevent data loss and ensure system reliability.",
+      "Implemented basic security measures, such as user access controls and password management, to protect sensitive inventory and financial data.",
+    ],
+  },
+];
+
 
   const education = [
     {
